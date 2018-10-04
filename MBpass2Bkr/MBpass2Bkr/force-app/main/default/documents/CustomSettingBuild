@@ -1,0 +1,8 @@
+Custom setting needs to be built: BkrSFDCIntegration__c
+4 fields
+EnpointURL Text(128)
+password Text(128)
+username Text(128)
+token Text(128)
+
+These will store the access to the receiving system
