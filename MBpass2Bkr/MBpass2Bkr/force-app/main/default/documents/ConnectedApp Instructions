@@ -1,0 +1,83 @@
+For Mindbody Data to Booker Salesforce -->
+In Booker Salesforce:
+Go to Create -->
+Apps -->
+Create New Connected App
+Give Name --> ex.MBO2BKRConnection
+Give API Name --> ex.MBO2BKRConnection
+Contact Email --> ex.bsa@mindbodyonline.com
+Enable OAuth Settings = True
+Callback URL --> enter https://test.salesforce.com
+Selected OAuth Scopes --> Select All
+After saving...
+Make note of the Consumer Key and the Consumer Secret -->
+Go then to the Mindbody Salesforce -->
+Go to Security Controls -->
+Auth Providers -->
+Create New Auth Provider Record
+Provider Type = Salesforce
+Name --> ex.MBO2BKRauth
+URL Suffix --> ex.MBO2BKRauth
+Enter the Consumer Key from Booker Salesforce
+Enter the Consumer Secret from Booker Salesforce
+Authorize and Token endpoints are already entered
+Default Scopes --> ex.full refresh_token offline_access
+Click on Automatically create a registration handler template
+Execute Registration As --> ex.Rodney Jennings(MBO User)
+Callback URL is displayed at the bottom of new Record
+Copy URL and go back to Booker Salesforce.
+Edit the Connected App and update the Callback URL
+Next, Go to Security Controls -->
+Named Credentials -->
+Create New Named Credential Record
+Label --> ex.MBO2BKRcred
+Name --> ex.MBO2BKRcred
+URL --> ex.https://cs66.salesforce.com/
+Identity Type = Named Principal
+Authentication Protocol = OAuth 2.0
+Authentication Provider = Name of Auth Provider Created Earlier ex.MBO2BKRauth
+Scope --> ex.full refresh_token offline_access
+Authenticated as --> ex.rodney.jennings@booker.com.rodney
+
+
+For Booker Data to Mindbody Salesforce -->
+In Mindbody Salesforce:
+Go to Create -->
+Apps -->
+Create New Connected App
+Give Name --> ex.BKR2MBOConnection
+Give API Name --> ex.BKR2MBOConnection
+Contact Email --> ex.bsa@mindbodyonline.com
+Enable OAuth Settings = True
+Callback URL --> enter https://test.salesforce.com
+Selected OAuth Scopes --> Select All
+After saving...
+Make note of the Consumer Key and the Consumer Secret -->
+Go then to the Booker Salesforce -->
+Go to Security Controls -->
+Auth Providers -->
+Create New Auth Provider Record
+Provider Type = Salesforce
+Name --> ex.BKR2MBOauth
+URL Suffix --> ex.BKR2MBOauth
+Enter the Consumer Key from Mindbody Salesforce
+Enter the Consumer Secret from Mindbody Salesforce
+Authorize and Token endpoints are already entered
+Default Scopes --> ex.full refresh_token offline_access
+Click on Automatically create a registration handler template
+Execute Registration As --> ex.Rodney Jennings(Booker User)
+Callback URL is displayed at the bottom of new Record
+Copy URL and go back to Mindbody Salesforce.
+Edit the Connected App and update the Callback URL
+Next, Go to Security Controls -->
+Named Credentials -->
+Create New Named Credential Record
+Label --> ex.BKR2MBOcred
+Name --> ex.BKR2MBOcred
+URL --> ex.https://cs65.salesforce.com/
+Identity Type = Named Principal
+Authentication Protocol = OAuth 2.0
+Authentication Provider = Name of Auth Provider Created Earlier ex.BKR2MBOauth
+Scope --> ex.full refresh_token offline_access
+Start Authentication Flow on Save = True
+Authenticated as --> ex.rodney.jennings@mindbodyonline.com.rodney

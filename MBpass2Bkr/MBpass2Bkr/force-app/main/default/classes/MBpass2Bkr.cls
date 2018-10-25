@@ -10,30 +10,24 @@ public class MBpass2Bkr {
 
         BkrSFDCIntegration__c bkrConstant = BkrSFDCIntegration__c.getOrgDefaults();
 
-        String url = bkrConstant.EndpointURL__c;
-
+        String url = bkrConstant.PostEndpointURL__c;
+        url = 'callout:MBO2BKRcred' + url;
+        
         String jsonBody;
         
         jsonBody = createJSON4Bkr.genJSON4Bkr(OppID);
 
         IF(!Test.isRunningTest()) {
-            String username = bkrConstant.username__c;
-            String password = bkrConstant.password__c;
-            String token = bkrConstant.token__c;
-            Blob headerValue = Blob.valueOf(username + ':' + password + token);
-            String authorizationHeader = 'Basic' + EncodingUtil.base64Encode(headerValue);
-
             IF(url != null) {
                 req.setEndpoint(url);
             }else{
-                req.setEndpoint('www.booker.com');
+                req.setEndpoint('https://cs66.salesforce.com/services/data/v43.0/composite');
             }
             req.setMethod('POST');
             req.setBody(jsonBody);
-
-            req.setHeader('Authorization', authorizationHeader);
+            //System.debug('Ouput JSON: ' + jsonBody);
             req.setHeader('Content-Type', 'application/json');
-
+            
             try{
                 res = h.send(req);
             }catch(System.CalloutException e) {
@@ -41,10 +35,25 @@ public class MBpass2Bkr {
                 System.debug(res.toString());
             }
 
-            o.Id = OppID;
+            //o.Id = OppID;
             //Store on the account any error that may have occured
-            o.SyncResponse__c = res.toString();
-            update o;
+            //o.SyncResponse__c = res.toString();
+            //update o;
+            /*
+            JSONParser parser = JSON.createParser(res.getBody());
+        WHILE (parser.nextToken() != null) {
+            IF((parser.getCurrentToken() == JSONToken.FIELD_NAME)) {
+                String fieldName = parser.getText();
+                parser.nextToken();
+                if(fieldName == 'access_token') {
+                    accesstoken = parser.getText();
+                }
+            }
+        }
+        return accesstoken;
+            */
         }
     }
 }
+
+    

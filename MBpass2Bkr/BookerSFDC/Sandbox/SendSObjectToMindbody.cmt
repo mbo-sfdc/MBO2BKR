@@ -1,0 +1,12 @@
+Custom Metadata Type
+Label: SendSObjectToMindbody
+Object Name: SendSObjectToMindbody
+API Name: SendSObjectToMindbody
+Visibility: Public
+
+Custom Fields::
+BookerAPI Name -- BookerAPI_Name__c -- Text(255) -- Upgradable
+MindbodyAPI Name -- MindbodyAPI_Name__c -- Text(255) -- Upgradable
+sObjectType -- sObjectType__c -- Picklist -- Upgradable
+    Values --> Opportunity, Account, Contact <--
+

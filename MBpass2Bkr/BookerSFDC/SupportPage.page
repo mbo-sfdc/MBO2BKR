@@ -1,0 +1,82 @@
+<apex:page showHeader="false" sidebar="false" controller="SupportPage_Controller" applyHtmlTag="false">
+    <script>
+        function displaydiv(val)
+        {
+            if(val=='value1')
+            {
+                document.getElementById('chkO').style.display='block';
+                document.getElementById('chkC').style.display='none';
+            } else {
+                document.getElementById('chkO').style.display='none';
+                document.getElementById('chkC').style.display='block';
+            }
+        }
+    </script>
+
+    <apex:form >
+        <apex:pageBlock >
+        	<apex:pageMessages id="msg" />
+            <apex:pageBlockSection title="Search Criteria" collapsible="false">
+            	<apex:pageBlockSectionItem >
+                	<apex:outputLabel value="Location ID" />
+                    <apex:inputText value="{!nameQuery}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:CommandButton action="{!executeSearch}" value="Search" rerender="msg, ActName, C" />
+                    <apex:selectList id="chooseColor" onchange="displaydiv(this.value)" size="1"> <!--  -->
+                        <apex:selectOption itemValue="value0" itemLabel="Please Select" />
+            			<apex:selectOption itemValue="value1" itemLabel="Opportunity"/>
+            			<apex:selectOption itemValue="value2" itemLabel="Case"/>
+        			</apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="ActName" >
+                Account Name: <apex:outputLabel value="{!AName}" />
+                <br/><br/>
+            </apex:pageBlockSection>
+            <apex:outputPanel id="RepName">
+        	Customer Support Rep: <apex:selectList value="{!selectedRep}" size="1" multiselect="false">
+                    			      <apex:selectOptions value="{!selectValues}" />
+                    			  </apex:selectList>
+                <br/><br/>
+            Client Name: <apex:selectList id="C" value="{!selectedCon}" size="1" multiselect="false">
+                    					  	  <apex:selectOptions value="{!Cons}" />
+                    					  </apex:selectList>
+                    <br/><br/>
+            </apex:outputPanel>
+            <div id="chkO" style="display:none;">
+        		<div id="OppForm">
+            		Opp Name: <apex:inputField value="{!sdi.Opportunity_Name__c}" />
+                    <br/><br/>
+                    Opp Type: <apex:selectList value="{!selectedType}" size="1" multiselect="fales">
+                    	<apex:selectOptions value="{!OppType}" />
+                    </apex:selectList>
+                    <br/><br/>
+                    Monthly Fee: <apex:inputField value="{!sdi.OppMnthlyFee__c}" />
+                    <br/><br/>
+                    Close Date: <apex:inputField value="{!sdi.Opportunity_Close_Date__c}" />
+                    <br/><br/>
+                    Opp Notes: <apex:inputField value="{!sdi.Opportunity_Notes__c}" />
+                    <br/><br/>
+                    Opp Product: <apex:inputField value="{!sdi.Opportunity_Product__c}" />
+                    <br/><br/>
+                    
+                    <apex:commandButton action="{!saveOpp}" value="Create Opp" />
+                </div>
+    		</div>
+    		<div id="chkC" style="display:none;">
+        		Case Description: <apex:inputField value="{!sdi.Remediation_Description__c}" />
+                <br/><br/>
+                Remediation Type: <apex:inputField value="{!sdi.Remediation_Type__c}" />
+                <br/><br/>
+                Remediation Reason Code: <apex:inputField value="{!sdi.New_Remediation_Reason_Code__c}" />
+                <br/><br/>
+                Remediation Sub Reason Code: <apex:inputField value="{!sdi.New_Remediation_Reason_Sub_Code__c}" />
+                <br/><br/>
+                Remediation Amount: <apex:inputField value="{!sdi.Remediation_Amount__c}" />
+                <br/><br/>
+                <apex:commandButton action="{!saveCase}" value="Create Case" />
+            </div>
+		</apex:pageBlock>
+    </apex:form>
+</apex:page>
